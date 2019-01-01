@@ -2,6 +2,38 @@
 Self-Driving Car Engineer Nanodegree Program
 
 ---
+## A description of the effect of each parameter of the PID algorithm
+### P Parameter
+The P is the proportional term. It calculates the steer value directly proportional to the current CTE.
+
+Kp * p_error
+
+The P results in an overshooting around zero CTE. Because it operates based on a steady state error, the P term can not compensate a bias.If the Kp value is too large the controller overshoots the center line and starts to oscillate.
+If Kp is too low the controller reacts slowly on cross track errors. The vehicle tends to leave the track especially in sharp curves.
+
+### I Parameter
+The I is the integral term. It calculates the steer value using the sum of all previous CTE.
+
+Ki * i_error
+
+The I results in an oscillation around zero CTE. The I term is necessary to compensate for a bias.
+Large Ki values leads to an oscillating controller.
+
+
+### D Parameter
+The D is the dirivative term. It calculates the steer value using the difference between the last timestep's CTE and the current CTE.
+
+Kd * d_error
+
+The D results in a strong damping when approach zero CTE and reduces overshooting.
+Small Kd values do not damp the system thus the controller tends to overshoot and oscillation. Too large Kd values leads to a slow reduction of the cross track error.
+
+## PID Tuning
+Reference  https://study-hall.udacity.com/sg-163586-9999/rooms/community:nd013:163586-cohort-9999-project-824/community:thread-11464700867-336085?contextType=room
+
+init parameter Kp=0.05,Ki=0.0001,Kd=1.5
+final parameter Kp=0.159919,Ki=5.12829e-05,Kd=2.30546
+
 
 ## Dependencies
 
