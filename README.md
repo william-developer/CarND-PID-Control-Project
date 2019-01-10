@@ -8,8 +8,14 @@ The P is the proportional term. It calculates the steer value directly proportio
 
 Kp * p_error
 
-The P results in an overshooting around zero CTE. Because it operates based on a steady state error, the P term can not compensate a bias.If the Kp value is too large the controller overshoots the center line and starts to oscillate.
+The P results in an overshooting around zero CTE. Because it operates based on a steady state error, the P term can not compensate a bias.
+
+If the Kp value is too large the controller overshoots the center line and starts to oscillate.
+[Kp is too large(Kp=1)](video/kp_large.mov)
+
 If Kp is too low the controller reacts slowly on cross track errors. The vehicle tends to leave the track especially in sharp curves.
+[Kp is too low(Kp=0.1)](video/kp_low.mov)
+
 
 ### I Parameter
 The I is the integral term. It calculates the steer value using the sum of all previous CTE.
@@ -18,7 +24,10 @@ Ki * i_error
 
 The I results in an oscillation around zero CTE. The I term is necessary to compensate for a bias.
 Large Ki values leads to an oscillating controller.
+[Ki is too large(kp=0.05,ki=10,Kd=1.5)](video/ki_large.mov)
 
+The low Ki value results in the controller being insensitive to sharp turns and easy to rush out of the runway.
+[Ki is too low(kp=0.05,ki=1e-10,Kd=1.5)](video/ki_low.mov)
 
 ### D Parameter
 The D is the dirivative term. It calculates the steer value using the difference between the last timestep's CTE and the current CTE.
@@ -26,13 +35,23 @@ The D is the dirivative term. It calculates the steer value using the difference
 Kd * d_error
 
 The D results in a strong damping when approach zero CTE and reduces overshooting.
-Small Kd values do not damp the system thus the controller tends to overshoot and oscillation. Too large Kd values leads to a slow reduction of the cross track error.
+Too large Kd values leads to a slow reduction of the cross track error.
+steering angle change rapid，driving instability.
+[Kd is too large(kp=0.05,Kd=100)](video/kd_large.mov)
+
+Small Kd values do not damp the system thus the controller tends to overshoot and oscillation.
+Vehicles rushes out of the runway easily.
+[Kd is too low(kp=0.05,Kd=0.01)](video/kd_low.mov)
+
+After many tests, the relatively reasonable settings are as follows:Kp=0.05，ki=0.001，Kd=1.5，But there are still some problems, not the optimal parameters.
 
 ## PID Tuning
-Reference  https://study-hall.udacity.com/sg-163586-9999/rooms/community:nd013:163586-cohort-9999-project-824/community:thread-11464700867-336085?contextType=room
-
 init parameter Kp=0.05,Ki=0.0001,Kd=1.5
+
+Using twiddle method to tuning and optimize PID parameters.
 final parameter Kp=0.159919,Ki=5.12829e-05,Kd=2.30546
+
+Reference  https://study-hall.udacity.com/sg-163586-9999/rooms/community:nd013:163586-cohort-9999-project-824/community:thread-11464700867-336085?contextType=room
 
 
 ## Dependencies
