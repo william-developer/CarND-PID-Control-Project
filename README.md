@@ -24,10 +24,10 @@ Ki * i_error
 
 The I results in an oscillation around zero CTE. The I term is necessary to compensate for a bias.
 Large Ki values leads to an oscillating controller.
-[Ki is too large(kp=0.05,ki=10,Kd=1.5)](video/ki_large.mov)
+[Ki is too large(Kp=0.05,Ki=10,Kd=1.5)](video/ki_large.mov)
 
 The low Ki value results in the controller being insensitive to sharp turns and easy to rush out of the runway.
-[Ki is too low(kp=0.05,ki=1e-10,Kd=1.5)](video/ki_low.mov)
+[Ki is too low(Kp=0.05,Ki=1e-10,Kd=1.5)](video/ki_low.mov)
 
 ### D Parameter
 The D is the dirivative term. It calculates the steer value using the difference between the last timestep's CTE and the current CTE.
@@ -37,11 +37,11 @@ Kd * d_error
 The D results in a strong damping when approach zero CTE and reduces overshooting.
 Too large Kd values leads to a slow reduction of the cross track error.
 steering angle change rapid，driving instability.
-[Kd is too large(kp=0.05,Kd=100)](video/kd_large.mov)
+[Kd is too large(Kp=0.05,Kd=100)](video/kd_large.mov)
 
 Small Kd values do not damp the system thus the controller tends to overshoot and oscillation.
 Vehicles rushes out of the runway easily.
-[Kd is too low(kp=0.05,Kd=0.01)](video/kd_low.mov)
+[Kd is too low(Kp=0.05,Kd=0.01)](video/kd_low.mov)
 
 After many tests, the relatively reasonable settings are as follows:Kp=0.05，ki=0.001，Kd=1.5，But there are still some problems, not the optimal parameters.
 
